@@ -45,8 +45,8 @@ class Login extends StatelessWidget {
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.fromLTRB(
-                screenSize.width * 0.1, // 10% of the screen width on the left
-                screenSize.height * 0.1, // 10% of the screen height at the top
+                screenSize.width * 0.2, // 10% of the screen width on the left
+                screenSize.height * 0.2, // 10% of the screen height at the top
                 screenSize.width * 0.1, // 10% of the screen width on the right
                 screenSize.height *
                     0.1, // 10% of the screen height at the bottom
@@ -57,7 +57,8 @@ class Login extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/images/book.jpg'),
+                      Image.asset(
+                          width: 200, height: 200, 'assets/images/book.jpg'),
                     ],
                   ),
                   const SizedBox(

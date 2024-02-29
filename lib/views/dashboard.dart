@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +14,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Dashboard(),
+      home: Dashboard(),
     );
   }
 }
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+  const Dashboard({Key? key});
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -45,16 +45,27 @@ class _DashboardState extends State<Dashboard> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.black,
               ),
-              child: Text(
-                'Recipe App',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    'assets/images/book.jpg',
+                    height: 80,
+                    width: 80,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Recipe App',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
               ),
             ),
             ListTile(
@@ -109,7 +120,7 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class RecipeList extends StatelessWidget {
-  const RecipeList({super.key});
+  const RecipeList({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +131,7 @@ class RecipeList extends StatelessWidget {
 }
 
 class Favorites extends StatelessWidget {
-  const Favorites({super.key});
+  const Favorites({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +142,7 @@ class Favorites extends StatelessWidget {
 }
 
 class Profile extends StatelessWidget {
-  const Profile({super.key});
+  const Profile({Key? key});
 
   @override
   Widget build(BuildContext context) {
