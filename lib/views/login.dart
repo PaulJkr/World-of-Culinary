@@ -5,7 +5,7 @@ import 'package:recipe_app/views/customtext.dart';
 import 'package:recipe_app/views/customtextfield.dart';
 
 class Login extends StatelessWidget {
-  Login({Key? key});
+  Login({super.key});
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
             left: 0,
             right: 0,
             child: AppBar(
-              title: CustomText(
+              title: const CustomText(
                 label: "World of Culinary",
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.normal,
@@ -57,7 +57,7 @@ class Login extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/images/knife.jpg'),
+                      Image.asset('assets/images/book.jpg'),
                     ],
                   ),
                   const SizedBox(

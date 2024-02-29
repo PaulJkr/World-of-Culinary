@@ -8,7 +8,7 @@ import 'package:recipe_app/views/registration.dart';
 
 var screens = [
   Home(),
-  Dashboard(),
+  const Dashboard(),
   const Text("Profile"),
 ];
 

@@ -5,7 +5,7 @@ import 'package:recipe_app/views/customtext.dart';
 import 'package:recipe_app/views/customtextfield.dart';
 
 class Home extends StatelessWidget {
-  Home({Key? key});
+  Home({super.key});
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -45,7 +45,7 @@ class Home extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          "assets/images/knife.jpg",
+                          "assets/images/book.jpg",
                           height: 120,
                           width: 120,
                         ),

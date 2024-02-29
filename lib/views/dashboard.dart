@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,12 +14,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Dashboard(),
+      home: const Dashboard(),
     );
   }
 }
 
 class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -26,22 +30,22 @@ class _DashboardState extends State<Dashboard> {
   int _currentIndex = 0;
 
   final List<Widget> _tabs = [
-    RecipeList(),
-    Favorites(),
-    Profile(),
+    const RecipeList(),
+    const Favorites(),
+    const Profile(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recipe App'),
+        title: const Text('Recipe App'),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -54,21 +58,21 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             ListTile(
-              title: Text('Home'),
+              title: const Text('Home'),
               onTap: () {
                 Navigator.pop(context);
                 // Navigate to the home screen or perform any action
               },
             ),
             ListTile(
-              title: Text('Categories'),
+              title: const Text('Categories'),
               onTap: () {
                 Navigator.pop(context);
                 // Navigate to the categories screen or perform any action
               },
             ),
             ListTile(
-              title: Text('Settings'),
+              title: const Text('Settings'),
               onTap: () {
                 Navigator.pop(context);
                 // Navigate to the settings screen or perform any action
@@ -85,7 +89,7 @@ class _DashboardState extends State<Dashboard> {
             _currentIndex = index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -105,27 +109,33 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class RecipeList extends StatelessWidget {
+  const RecipeList({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Recipe List'),
     );
   }
 }
 
 class Favorites extends StatelessWidget {
+  const Favorites({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Favorites'),
     );
   }
 }
 
 class Profile extends StatelessWidget {
+  const Profile({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Profile'),
     );
   }
