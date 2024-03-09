@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +16,15 @@ class MyApp extends StatelessWidget {
       ),
       home: const Dashboard(),
       routes: {
-        '/categories': (context) => Categories(),
-        '/settings': (context) => Settings(),
+        '/categories': (context) => const Categories(),
+        '/settings': (context) => const Settings(),
       },
     );
   }
 }
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -136,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class RecipeList extends StatelessWidget {
-  const RecipeList({Key? key}) : super(key: key);
+  const RecipeList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +147,7 @@ class RecipeList extends StatelessWidget {
 }
 
 class Favorites extends StatelessWidget {
-  const Favorites({Key? key}) : super(key: key);
+  const Favorites({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +158,7 @@ class Favorites extends StatelessWidget {
 }
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +169,7 @@ class Profile extends StatelessWidget {
 }
 
 class Categories extends StatelessWidget {
-  const Categories({Key? key}) : super(key: key);
+  const Categories({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +177,7 @@ class Categories extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Categories'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Display your list of categories here.'),
       ),
     );
@@ -185,7 +185,7 @@ class Categories extends StatelessWidget {
 }
 
 class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +193,7 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Your settings screen goes here.'),
       ),
     );
