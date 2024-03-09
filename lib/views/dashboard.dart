@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,14 @@ class MyApp extends StatelessWidget {
       home: const Dashboard(),
       routes: {
         '/categories': (context) => Categories(),
-        // Add more routes for other screens if needed
+        '/settings': (context) => Settings(),
       },
     );
   }
 }
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -93,7 +93,7 @@ class _DashboardState extends State<Dashboard> {
             ListTile(
               title: const Text('Settings'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, '/settings');
                 // Navigate to the settings screen or perform any action
               },
             ),
@@ -136,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class RecipeList extends StatelessWidget {
-  const RecipeList({super.key});
+  const RecipeList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +147,7 @@ class RecipeList extends StatelessWidget {
 }
 
 class Favorites extends StatelessWidget {
-  const Favorites({super.key});
+  const Favorites({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +158,7 @@ class Favorites extends StatelessWidget {
 }
 
 class Profile extends StatelessWidget {
-  const Profile({super.key});
+  const Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -179,6 +179,22 @@ class Categories extends StatelessWidget {
       ),
       body: Center(
         child: Text('Display your list of categories here.'),
+      ),
+    );
+  }
+}
+
+class Settings extends StatelessWidget {
+  const Settings({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+      ),
+      body: Center(
+        child: Text('Your settings screen goes here.'),
       ),
     );
   }
