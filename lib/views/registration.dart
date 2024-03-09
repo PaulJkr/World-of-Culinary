@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/cover.jpg',
+              'assets/images/rgs.jpg',
               fit: BoxFit.cover,
             ),
           ),

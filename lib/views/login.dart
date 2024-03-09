@@ -32,8 +32,9 @@ class Login extends StatelessWidget {
             child: AppBar(
               title: const CustomText(
                 label: "World of Culinary",
+                fontSize: 100,
                 fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.w900,
                 labelColor: appWhiteColor,
               ),
               backgroundColor: Colors.transparent,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +14,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Dashboard(),
+      home: const Dashboard(),
+      routes: {
+        '/categories': (context) => Categories(),
+        // Add more routes for other screens if needed
+      },
     );
   }
 }
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key});
+  const Dashboard({super.key});
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -38,15 +42,19 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Recipe App'),
+        title: const Text('World of Culinary'),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.black,
               ),
               child: Column(
@@ -58,8 +66,8 @@ class _DashboardState extends State<Dashboard> {
                     width: 80,
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    'Recipe App',
+                  const Text(
+                    'World of Culinary',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -78,7 +86,7 @@ class _DashboardState extends State<Dashboard> {
             ListTile(
               title: const Text('Categories'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, '/categories');
                 // Navigate to the categories screen or perform any action
               },
             ),
@@ -92,7 +100,15 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
       ),
-      body: _tabs[_currentIndex],
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/menu.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: _tabs[_currentIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -120,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class RecipeList extends StatelessWidget {
-  const RecipeList({Key? key});
+  const RecipeList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +147,7 @@ class RecipeList extends StatelessWidget {
 }
 
 class Favorites extends StatelessWidget {
-  const Favorites({Key? key});
+  const Favorites({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -142,12 +158,28 @@ class Favorites extends StatelessWidget {
 }
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key});
+  const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
       child: Text('Profile'),
+    );
+  }
+}
+
+class Categories extends StatelessWidget {
+  const Categories({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Categories'),
+      ),
+      body: Center(
+        child: Text('Display your list of categories here.'),
+      ),
     );
   }
 }

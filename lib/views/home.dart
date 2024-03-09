@@ -4,10 +4,9 @@ import 'package:get/get.dart';
 import 'package:recipe_app/configs/constants.dart';
 import 'package:recipe_app/controller/homescontroller.dart';
 import 'package:recipe_app/views/dashboard.dart';
-import 'package:recipe_app/views/registration.dart';
 
 var screens = [
-  Home(),
+  const Homes(),
   const Dashboard(),
   const Text("Profile"),
 ];
