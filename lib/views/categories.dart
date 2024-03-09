@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/views/appetizers.dart';
+import 'package:recipe_app/views/maincourse.dart';
 
 void main() {
   runApp(const MyRecipeApp());
@@ -64,6 +65,18 @@ class CategoryTile extends StatelessWidget {
           // Navigate to the corresponding screen based on the selected category
           switch (category) {
             case 'Appetizers':
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AppetizersScreen()),
+              );
+              break;
+            case 'Main Course':
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainCourseScreen()),
+              );
+              break;
+            case 'Desserts':
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AppetizersScreen()),
