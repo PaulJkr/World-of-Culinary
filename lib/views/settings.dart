@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyRecipeApp());
+  runApp(const MyRecipeApp());
 }
 
 class MyRecipeApp extends StatelessWidget {
+  const MyRecipeApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,47 +14,49 @@ class MyRecipeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SettingsScreen(),
+      home: const SettingsScreen(),
     );
   }
 }
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('App Settings'),
+        title: const Text('App Settings'),
       ),
       body: ListView(
         children: [
           ListTile(
-            title: Text('Notification Preferences'),
+            title: const Text('Notification Preferences'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => NotificationPreferencesScreen()),
+                    builder: (context) => const NotificationPreferencesScreen()),
               );
             },
           ),
           ListTile(
-            title: Text('Account Settings'),
+            title: const Text('Account Settings'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => AccountSettingsScreen()),
+                    builder: (context) => const AccountSettingsScreen()),
               );
             },
           ),
           ListTile(
-            title: Text('Theme Preferences'),
+            title: const Text('Theme Preferences'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ThemePreferencesScreen()),
+                    builder: (context) => const ThemePreferencesScreen()),
               );
             },
           ),
@@ -63,6 +67,8 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class NotificationPreferencesScreen extends StatefulWidget {
+  const NotificationPreferencesScreen({super.key});
+
   @override
   _NotificationPreferencesScreenState createState() =>
       _NotificationPreferencesScreenState();
@@ -77,12 +83,12 @@ class _NotificationPreferencesScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notification Preferences'),
+        title: const Text('Notification Preferences'),
       ),
       body: Column(
         children: [
           SwitchListTile(
-            title: Text('Receive Recipe Notifications'),
+            title: const Text('Receive Recipe Notifications'),
             value: receiveRecipeNotifications,
             onChanged: (bool value) {
               setState(() {
@@ -91,7 +97,7 @@ class _NotificationPreferencesScreenState
             },
           ),
           SwitchListTile(
-            title: Text('Receive Newsletters'),
+            title: const Text('Receive Newsletters'),
             value: receiveNewsletters,
             onChanged: (bool value) {
               setState(() {
@@ -106,22 +112,24 @@ class _NotificationPreferencesScreenState
 }
 
 class AccountSettingsScreen extends StatelessWidget {
+  const AccountSettingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account Settings'),
+        title: const Text('Account Settings'),
       ),
       body: Column(
         children: [
           ListTile(
-            title: Text('Change Password'),
+            title: const Text('Change Password'),
             onTap: () {
               // Navigate to Change Password screen
             },
           ),
           ListTile(
-            title: Text('Logout'),
+            title: const Text('Logout'),
             onTap: () {
               // Perform logout action
             },
@@ -133,6 +141,8 @@ class AccountSettingsScreen extends StatelessWidget {
 }
 
 class ThemePreferencesScreen extends StatefulWidget {
+  const ThemePreferencesScreen({super.key});
+
   @override
   _ThemePreferencesScreenState createState() => _ThemePreferencesScreenState();
 }
@@ -144,12 +154,12 @@ class _ThemePreferencesScreenState extends State<ThemePreferencesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Theme Preferences'),
+        title: const Text('Theme Preferences'),
       ),
       body: Column(
         children: [
           RadioListTile<String>(
-            title: Text('Light Theme'),
+            title: const Text('Light Theme'),
             value: 'light',
             groupValue: selectedTheme,
             onChanged: (String? value) {
@@ -161,7 +171,7 @@ class _ThemePreferencesScreenState extends State<ThemePreferencesScreen> {
             },
           ),
           RadioListTile<String>(
-            title: Text('Dark Theme'),
+            title: const Text('Dark Theme'),
             value: 'dark',
             groupValue: selectedTheme,
             onChanged: (String? value) {
