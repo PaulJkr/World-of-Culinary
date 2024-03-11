@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/views/appetizers.dart';
+import 'package:recipe_app/views/desserts.dart';
+import 'package:recipe_app/views/drinks.dart';
 import 'package:recipe_app/views/maincourse.dart';
 
 void main() {
@@ -79,10 +81,15 @@ class CategoryTile extends StatelessWidget {
             case 'Desserts':
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AppetizersScreen()),
+                MaterialPageRoute(builder: (context) => DessertsScreen()),
               );
               break;
-            // Add cases for other categories and screens as needed
+            case 'Drinks':
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DrinksScreen()),
+              );
+              break;
 
             default:
               // Handle cases for unknown categories
