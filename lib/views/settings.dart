@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyRecipeApp extends StatelessWidget {
-  const MyRecipeApp({super.key});
+  const MyRecipeApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MyRecipeApp extends StatelessWidget {
 }
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,8 @@ class SettingsScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const NotificationPreferencesScreen()),
+                  builder: (context) => const NotificationPreferencesScreen(),
+                ),
               );
             },
           ),
@@ -46,7 +47,8 @@ class SettingsScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const AccountSettingsScreen()),
+                  builder: (context) => const AccountSettingsScreen(),
+                ),
               );
             },
           ),
@@ -56,7 +58,8 @@ class SettingsScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const ThemePreferencesScreen()),
+                  builder: (context) => const ThemePreferencesScreen(),
+                ),
               );
             },
           ),
@@ -67,7 +70,7 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class NotificationPreferencesScreen extends StatefulWidget {
-  const NotificationPreferencesScreen({super.key});
+  const NotificationPreferencesScreen({Key? key}) : super(key: key);
 
   @override
   _NotificationPreferencesScreenState createState() =>
@@ -112,7 +115,7 @@ class _NotificationPreferencesScreenState
 }
 
 class AccountSettingsScreen extends StatelessWidget {
-  const AccountSettingsScreen({super.key});
+  const AccountSettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +144,7 @@ class AccountSettingsScreen extends StatelessWidget {
 }
 
 class ThemePreferencesScreen extends StatefulWidget {
-  const ThemePreferencesScreen({super.key});
+  const ThemePreferencesScreen({Key? key}) : super(key: key);
 
   @override
   _ThemePreferencesScreenState createState() => _ThemePreferencesScreenState();
