@@ -4,6 +4,7 @@ import 'package:recipe_app/views/desserts.dart';
 import 'package:recipe_app/views/drinks.dart';
 import 'package:recipe_app/views/maincourse.dart';
 import 'package:recipe_app/views/salads.dart';
+import 'package:recipe_app/views/snacks.dart';
 
 void main() {
   runApp(const MyRecipeApp());
@@ -95,6 +96,12 @@ class CategoryTile extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SaladsScreen()),
+              );
+              break;
+            case 'Snacks':
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SnacksScreen()),
               );
               break;
 
