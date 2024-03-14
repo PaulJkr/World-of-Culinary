@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +23,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
-
-  @override
-  _DashboardState createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
-  int _currentIndex = 0;
-
-  final List<Widget> _tabs = [
-    const RecipeList(),
-    const Favorites(),
-    const Profile(),
-  ];
+class Dashboard extends StatelessWidget {
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,36 +94,14 @@ class _DashboardState extends State<Dashboard> {
             fit: BoxFit.cover,
           ),
         ),
-        child: _tabs[_currentIndex],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+        child: const RecipeList(),
       ),
     );
   }
 }
 
 class RecipeList extends StatelessWidget {
-  const RecipeList({super.key});
+  const RecipeList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -146,30 +111,8 @@ class RecipeList extends StatelessWidget {
   }
 }
 
-class Favorites extends StatelessWidget {
-  const Favorites({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Favorites'),
-    );
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Profile'),
-    );
-  }
-}
-
 class Categories extends StatelessWidget {
-  const Categories({super.key});
+  const Categories({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +128,7 @@ class Categories extends StatelessWidget {
 }
 
 class Settings extends StatelessWidget {
-  const Settings({super.key});
+  const Settings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
