@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyRecipeApp extends StatelessWidget {
-  const MyRecipeApp({super.key});
+  const MyRecipeApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class SaladsScreen extends StatelessWidget {
       'title': 'Caesar Salad',
       'image': 'assets/images/caesar.jpg',
       'ingredients':
-          'Romaine Lettuce, Croutons, Parmesan Cheese, Caesar Dressing',
+          '1. Romaine Lettuce, 2. Croutons, 3. Parmesan Cheese, 4. Caesar Dressing',
       'instructions':
           'Toss lettuce with dressing, top with croutons and cheese.',
     },
@@ -33,14 +33,14 @@ class SaladsScreen extends StatelessWidget {
       'title': 'Greek Salad',
       'image': 'assets/images/Greek.jpg',
       'ingredients':
-          'Cucumbers, Tomatoes, Red Onion, Feta Cheese, Olives, Olive Oil, Lemon Juice',
+          '1. Cucumbers, 2. Tomatoes, 3. Red Onion, 4. Feta Cheese, 5. Olives, 6. Olive Oil, 7. Lemon Juice',
       'instructions':
           'Chop vegetables, mix with cheese and olives, dress with oil and lemon juice.',
     },
     // Add more salad recipes
   ];
 
-  SaladsScreen({super.key});
+  SaladsScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class SaladsCard extends StatelessWidget {
   final String instructions;
 
   const SaladsCard(
-      {super.key,
+      {Key? key,
       required this.title,
       required this.image,
       required this.ingredients,
@@ -126,7 +126,7 @@ class RecipePage extends StatelessWidget {
   final String instructions;
 
   const RecipePage(
-      {super.key,
+      {Key? key,
       required this.title,
       required this.image,
       required this.ingredients,
@@ -134,6 +134,9 @@ class RecipePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> ingredientList = ingredients.split(', ');
+    List<String> instructionList = instructions.split('\n');
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -147,14 +150,14 @@ class RecipePage extends StatelessWidget {
             height: 200.0,
             fit: BoxFit.cover,
           ),
-          _buildSection('Ingredients:', ingredients),
-          _buildSection('Instructions:', instructions),
+          _buildSection('Ingredients:', ingredientList),
+          _buildSection('Instructions:', instructionList),
         ],
       ),
     );
   }
 
-  Widget _buildSection(String title, String content) {
+  Widget _buildSection(String title, List<String> contentList) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -168,9 +171,17 @@ class RecipePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8.0),
-          Text(
-            content,
-            style: const TextStyle(fontSize: 16.0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: contentList.map((content) {
+              return Text(
+                content.trim(),
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontStyle: FontStyle.italic,
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
