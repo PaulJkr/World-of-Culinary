@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyRecipeApp extends StatelessWidget {
-  const MyRecipeApp({super.key});
+  const MyRecipeApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,46 +14,79 @@ class MyRecipeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DessertsScreen(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Desserts'),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bacc.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: DessertsScreen(),
+        ),
+      ),
     );
   }
 }
 
 class DessertsScreen extends StatelessWidget {
-  final List<Map<String, String>> desserts = [
+  final List<Map<String, dynamic>> desserts = [
     {
       'title': 'Chocolate Cake',
       'image': 'assets/images/chocolate-cake.jpg',
-      'ingredients': 'Ingredient A, Ingredient B, Ingredient C',
-      'instructions': 'Step A, Step B, Step C',
+      'ingredients': [
+        '1. Granulated sugar, brown sugar and powdered',
+        '2. Cocoa powder',
+        '3. Baking soda',
+        '4. Salt',
+        '5. Boiling water',
+      ],
+      'instructions': [
+        '1. Heat oven and prepare pans: Preheat oven to 350 degrees. Butter two 9-inch round cake pans then line bottom of each with a round of parchment paper. Butter parchment paper. Wrap cake pans with baking strips for the most level cake.',
+        '2. Mix dry ingredients, then mix in boiling water: In a large, heat proof mixing bowl, whisk together granulated sugar brown sugar, cocoa powder, baking soda and salt.',
+        '3. Mix in wet ingredients: Using an electric hand mixer set on low speed blend in vegetable oil and melted butter until combined. Add eggs, egg yolks and vanilla extract and blend just to combined.',
+      ],
     },
     {
       'title': 'Strawberry Cheesecake',
       'image': 'assets/images/strawberrycheesecake.jpg',
-      'ingredients': 'Ingredient X, Ingredient Y, Ingredient Z',
-      'instructions': 'Step X, Step Y, Step Z',
+      'ingredients': [
+        '1. Strarwberries',
+        '2. Graham crackers',
+        '3. Granulated sugar',
+        '4. Butter',
+        '5. Cream cheese '
+      ],
+      'instructions': [
+        '1. Blend in eggs: Mix in eggs 2 at a time, mixing just until combined after additions. Scrape down bowl.',
+        '2. Add remaining: Blend in sour cream, heavy cream and vanilla just until combined. Tap bowl against countertop about 20 times to release any large air bubbles.',
+        '3. Prepare pan with foil: wrap 2 layers of heavy duty aluminum foil snuggly around outside and up to the top of springform pan',
+        '4. Pour filling over crust: Pour cheesecake filling over graham cracker crust, wiggle pan to level. Place cheesecake in a roasting pan large enough to fit springform pan with extra space around all sides.'
+      ],
     },
   ];
 
-  DessertsScreen({super.key});
+  DessertsScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Desserts'),
-      ),
-      body: ListView.builder(
-        itemCount: desserts.length,
-        itemBuilder: (context, index) {
-          return DessertsCard(
-            title: desserts[index]['title']!,
-            image: desserts[index]['image']!,
-            ingredients: desserts[index]['ingredients']!,
-            instructions: desserts[index]['instructions']!,
-          );
-        },
-      ),
+    return ListView.builder(
+      itemCount: desserts.length,
+      itemBuilder: (context, index) {
+        return DessertsCard(
+          title: desserts[index]['title']!,
+          image: desserts[index]['image']!,
+          ingredients: List<String>.from(
+            desserts[index]['ingredients'] as List<dynamic>,
+          ),
+          instructions: List<String>.from(
+            desserts[index]['instructions'] as List<dynamic>,
+          ),
+        );
+      },
     );
   }
 }
@@ -61,15 +94,16 @@ class DessertsScreen extends StatelessWidget {
 class DessertsCard extends StatelessWidget {
   final String title;
   final String image;
-  final String ingredients;
-  final String instructions;
+  final List<String> ingredients;
+  final List<String> instructions;
 
-  DessertsCard(
-      {super.key,
-      required this.title,
-      required this.image,
-      required this.ingredients,
-      required this.instructions});
+  const DessertsCard({
+    Key? key,
+    required this.title,
+    required this.image,
+    required this.ingredients,
+    required this.instructions,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -117,15 +151,16 @@ class DessertsCard extends StatelessWidget {
 class RecipePage extends StatelessWidget {
   final String title;
   final String image;
-  final String ingredients;
-  final String instructions;
+  final List<String> ingredients;
+  final List<String> instructions;
 
-  const RecipePage(
-      {super.key,
-      required this.title,
-      required this.image,
-      required this.ingredients,
-      required this.instructions});
+  const RecipePage({
+    Key? key,
+    required this.title,
+    required this.image,
+    required this.ingredients,
+    required this.instructions,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -142,14 +177,14 @@ class RecipePage extends StatelessWidget {
             height: 200.0,
             fit: BoxFit.cover,
           ),
-          _buildSection('Ingredients:', ingredients),
-          _buildSection('Instructions:', instructions),
+          _buildSection('Ingredients:', _buildList(ingredients)),
+          _buildSection('Instructions:', _buildList(instructions)),
         ],
       ),
     );
   }
 
-  Widget _buildSection(String title, String content) {
+  Widget _buildSection(String title, Widget content) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -162,13 +197,24 @@ class RecipePage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8.0),
-          Text(
-            content,
-            style: const TextStyle(fontSize: 16.0),
-          ),
+          SizedBox(height: 8.0),
+          content,
         ],
       ),
+    );
+  }
+
+  Widget _buildList(List<String> items) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return Text(
+          items[index],
+          style: TextStyle(
+              fontSize: 16.0, fontStyle: FontStyle.italic), // Change here
+        );
+      },
     );
   }
 }
