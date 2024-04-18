@@ -48,16 +48,24 @@ class SaladsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Salads'),
       ),
-      body: ListView.builder(
-        itemCount: salads.length,
-        itemBuilder: (context, index) {
-          return SaladsCard(
-            title: salads[index]['title']!,
-            image: salads[index]['image']!,
-            ingredients: salads[index]['ingredients']!,
-            instructions: salads[index]['instructions']!,
-          );
-        },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bacc.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: salads.length,
+          itemBuilder: (context, index) {
+            return SaladsCard(
+              title: salads[index]['title']!,
+              image: salads[index]['image']!,
+              ingredients: salads[index]['ingredients']!,
+              instructions: salads[index]['instructions']!,
+            );
+          },
+        ),
       ),
     );
   }
@@ -141,18 +149,26 @@ class RecipePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            image,
-            width: double.infinity,
-            height: 200.0,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bacc.jpg'),
             fit: BoxFit.cover,
           ),
-          _buildSection('Ingredients:', ingredientList),
-          _buildSection('Instructions:', instructionList),
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(
+              image,
+              width: double.infinity,
+              height: 200.0,
+              fit: BoxFit.cover,
+            ),
+            _buildSection('Ingredients:', ingredientList),
+            _buildSection('Instructions:', instructionList),
+          ],
+        ),
       ),
     );
   }
