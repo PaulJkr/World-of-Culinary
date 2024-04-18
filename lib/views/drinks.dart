@@ -24,13 +24,13 @@ class DrinksScreen extends StatelessWidget {
     {
       'title': 'Mango Smoothie',
       'image': 'assets/images/Mango-smoothie.jpg',
-      'ingredients': 'Mango, Yogurt, Milk, Honey',
+      'ingredients': '1. Mango, 2. Yogurt, 3. Milk, 4. Honey',
       'instructions': 'Blend all ingredients until smooth. Enjoy!',
     },
     {
       'title': 'Iced Coffee',
       'image': 'assets/images/iced_coffee.jpg',
-      'ingredients': 'Coffee, Ice, Milk, Sugar',
+      'ingredients': '1. Coffee, 2. Ice, 3. Milk, 4. Sugar',
       'instructions':
           'Brew coffee, let it cool, add ice and milk. Sweeten to taste.',
     },
@@ -44,16 +44,24 @@ class DrinksScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Drinks'),
       ),
-      body: ListView.builder(
-        itemCount: drinks.length,
-        itemBuilder: (context, index) {
-          return DrinksCard(
-            title: drinks[index]['title']!,
-            image: drinks[index]['image']!,
-            ingredients: drinks[index]['ingredients']!,
-            instructions: drinks[index]['instructions']!,
-          );
-        },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bacc.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: drinks.length,
+          itemBuilder: (context, index) {
+            return DrinksCard(
+              title: drinks[index]['title']!,
+              image: drinks[index]['image']!,
+              ingredients: drinks[index]['ingredients']!,
+              instructions: drinks[index]['instructions']!,
+            );
+          },
+        ),
       ),
     );
   }
@@ -139,18 +147,26 @@ class RecipePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            image,
-            width: double.infinity,
-            height: 200.0,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bacc.jpg'),
             fit: BoxFit.cover,
           ),
-          _buildSection('Ingredients:', ingredientList),
-          _buildSection('Instructions:', instructionList),
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(
+              image,
+              width: double.infinity,
+              height: 200.0,
+              fit: BoxFit.cover,
+            ),
+            _buildSection('Ingredients:', ingredientList),
+            _buildSection('Instructions:', instructionList),
+          ],
+        ),
       ),
     );
   }
@@ -174,7 +190,10 @@ class RecipePage extends StatelessWidget {
             children: contentList.map((content) {
               return Text(
                 content.trim(),
-                style: const TextStyle(fontSize: 16.0),
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontStyle: FontStyle.italic,
+                ),
               );
             }).toList(),
           ),
