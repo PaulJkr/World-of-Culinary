@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyRecipeApp extends StatelessWidget {
-  const MyRecipeApp({super.key});
+  const MyRecipeApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MyRecipeApp extends StatelessWidget {
 }
 
 class MainCourseScreen extends StatelessWidget {
-  final List<Map<String, String>> MainCourse = [
+  final List<Map<String, String>> mainCourse = [
     {
       'title': 'Grilled Chicken',
       'image': 'assets/images/chicken.jpg',
@@ -46,7 +46,7 @@ class MainCourseScreen extends StatelessWidget {
     // Add more main course recipes
   ];
 
-  MainCourseScreen({super.key});
+  MainCourseScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +55,13 @@ class MainCourseScreen extends StatelessWidget {
         title: const Text('Main Course'),
       ),
       body: ListView.builder(
-        itemCount: MainCourse.length,
+        itemCount: mainCourse.length,
         itemBuilder: (context, index) {
-          return MainCoursecard(
-            title: MainCourse[index]['title']!,
-            image: MainCourse[index]['image']!,
-            ingredients: MainCourse[index]['ingredients']!,
-            instructions: MainCourse[index]['instructions']!,
+          return MainCourseCard(
+            title: mainCourse[index]['title']!,
+            image: mainCourse[index]['image']!,
+            ingredients: mainCourse[index]['ingredients']!,
+            instructions: mainCourse[index]['instructions']!,
           );
         },
       ),
@@ -69,18 +69,19 @@ class MainCourseScreen extends StatelessWidget {
   }
 }
 
-class MainCoursecard extends StatelessWidget {
+class MainCourseCard extends StatelessWidget {
   final String title;
   final String image;
   final String ingredients;
   final String instructions;
 
-  const MainCoursecard(
-      {super.key,
-      required this.title,
-      required this.image,
-      required this.ingredients,
-      required this.instructions});
+  const MainCourseCard({
+    Key? key,
+    required this.title,
+    required this.image,
+    required this.ingredients,
+    required this.instructions,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -131,15 +132,19 @@ class RecipePage extends StatelessWidget {
   final String ingredients;
   final String instructions;
 
-  const RecipePage(
-      {super.key,
-      required this.title,
-      required this.image,
-      required this.ingredients,
-      required this.instructions});
+  const RecipePage({
+    Key? key,
+    required this.title,
+    required this.image,
+    required this.ingredients,
+    required this.instructions,
+  });
 
   @override
   Widget build(BuildContext context) {
+    List<String> ingredientList = ingredients.split(', ');
+    List<String> instructionList = instructions.split('\n');
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -153,14 +158,14 @@ class RecipePage extends StatelessWidget {
             height: 200.0,
             fit: BoxFit.cover,
           ),
-          _buildSection('Ingredients:', ingredients),
-          _buildSection('Instructions:', instructions),
+          _buildSection('Ingredients:', ingredientList),
+          _buildSection('Instructions:', instructionList),
         ],
       ),
     );
   }
 
-  Widget _buildSection(String title, String content) {
+  Widget _buildSection(String title, List<String> contentList) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -174,9 +179,17 @@ class RecipePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8.0),
-          Text(
-            content,
-            style: const TextStyle(fontSize: 16.0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: contentList.map((content) {
+              return Text(
+                content.trim(),
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontStyle: FontStyle.italic, // Change font style to italic
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
