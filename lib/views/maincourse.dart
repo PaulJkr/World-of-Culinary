@@ -24,14 +24,14 @@ class MainCourseScreen extends StatelessWidget {
     {
       'title': 'Grilled Chicken',
       'image': 'assets/images/chicken.jpg',
-      'ingredients': 'Chicken, Olive Oil, Salt, Pepper, Herbs',
+      'ingredients': '1. Chicken, 2. Olive Oil, 3. Salt, 4. Pepper, 5. Herbs',
       'instructions':
           '1. Marinate chicken\n2. Grill until cooked\n3. Serve hot',
     },
     {
       'title': 'Pasta Carbonara',
       'image': 'assets/images/pasta.jpg',
-      'ingredients': 'Pasta, Eggs, Bacon, Parmesan Cheese',
+      'ingredients': '1. Pasta, 2. Eggs, 3. Bacon, 4. Parmesan Cheese',
       'instructions':
           '1. Cook pasta\n2. Mix eggs, bacon, and cheese\n3. Combine and serve',
     },
@@ -39,7 +39,7 @@ class MainCourseScreen extends StatelessWidget {
       'title': 'Vegetarian Lasagna',
       'image': 'assets/images/lasagna.jpg',
       'ingredients':
-          'Lasagna Noodles, Marinara Sauce, Vegetables, Ricotta Cheese',
+          '1. Lasagna Noodles, 2. Marinara Sauce, 3. Vegetables, 4. Ricotta Cheese',
       'instructions':
           '1. Layer ingredients in a baking dish\n2. Bake until bubbly\n3. Enjoy!',
     },
@@ -54,16 +54,24 @@ class MainCourseScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Main Course'),
       ),
-      body: ListView.builder(
-        itemCount: mainCourse.length,
-        itemBuilder: (context, index) {
-          return MainCourseCard(
-            title: mainCourse[index]['title']!,
-            image: mainCourse[index]['image']!,
-            ingredients: mainCourse[index]['ingredients']!,
-            instructions: mainCourse[index]['instructions']!,
-          );
-        },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bacc.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: mainCourse.length,
+          itemBuilder: (context, index) {
+            return MainCourseCard(
+              title: mainCourse[index]['title']!,
+              image: mainCourse[index]['image']!,
+              ingredients: mainCourse[index]['ingredients']!,
+              instructions: mainCourse[index]['instructions']!,
+            );
+          },
+        ),
       ),
     );
   }
@@ -149,23 +157,45 @@ class RecipePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            image,
-            width: double.infinity,
-            height: 200.0,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bacc.jpg'),
             fit: BoxFit.cover,
           ),
-          _buildSection('Ingredients:', ingredientList),
-          _buildSection('Instructions:', instructionList),
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(
+              image,
+              width: double.infinity,
+              height: 200.0,
+              fit: BoxFit.cover,
+            ),
+            _buildSection('Ingredients:', _formatList(ingredientList)),
+            _buildSection('Instructions:', _formatList(instructionList)),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildSection(String title, List<String> contentList) {
+  static List<Widget> _formatList(List<String> items) {
+    return items
+        .map(
+          (item) => Text(
+            item.trim(),
+            style: const TextStyle(
+              fontSize: 16.0,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        )
+        .toList();
+  }
+
+  Widget _buildSection(String title, List<Widget> contentList) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -181,15 +211,7 @@ class RecipePage extends StatelessWidget {
           const SizedBox(height: 8.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: contentList.map((content) {
-              return Text(
-                content.trim(),
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  fontStyle: FontStyle.italic, // Change font style to italic
-                ),
-              );
-            }).toList(),
+            children: contentList,
           ),
         ],
       ),
