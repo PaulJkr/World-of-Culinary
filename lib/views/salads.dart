@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyRecipeApp extends StatelessWidget {
-  const MyRecipeApp({Key? key});
+  const MyRecipeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class SaladsScreen extends StatelessWidget {
     // Add more salad recipes
   ];
 
-  SaladsScreen({Key? key});
+  SaladsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class SaladsCard extends StatelessWidget {
   final String instructions;
 
   const SaladsCard(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.image,
       required this.ingredients,
@@ -134,7 +134,7 @@ class RecipePage extends StatelessWidget {
   final String instructions;
 
   const RecipePage(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.image,
       required this.ingredients,

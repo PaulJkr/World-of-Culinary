@@ -3,14 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/configs/constants.dart';
+import 'package:recipe_app/controller/logincontroller.dart';
 import 'package:recipe_app/views/customtext.dart';
 import 'package:recipe_app/views/customtextfield.dart';
 
-class Login extends StatelessWidget {
-  Login({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
+  LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -101,25 +108,32 @@ class Login extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                   ),
                   CustomTextField(
+                    userFieldController: phoneNumberController,
                     hint: "Phone number or email",
                     icon: Icons.person,
-                    hintMessage: '',
+                    hintMessage: 'enter phone number',
+                    customTextFieldController: TextEditingController(),
                     obscureText: false,
-                    controller: phoneNumberController,
+                    controller: null,
                   ),
                   const CustomText(
                     label: "Password",
                     fontWeight: FontWeight.normal,
                     fontStyle: FontStyle.normal,
                   ),
-                  CustomTextField(
-                    hint: "Secure Pin",
-                    icon: Icons.lock,
-                    prefIcon: Icons.visibility,
-                    isPassword: true,
-                    controller: passwordController,
-                    hintMessage: '',
-                    obscureText: true,
+                  Obx(
+                    () => CustomTextField(
+                      userFieldController: passwordController,
+                      hint: 'enter password',
+                      hideText: loginController.hidePassword.value,
+                      isPassword: true,
+                      icon: Icons.lock,
+                      controller:
+                          loginController, // Assuming loginController is an instance of LoginController
+                      customTextFieldController: passwordController,
+                      obscureText: true,
+                      hintMessage: 'Enter password',
+                    ),
                   ),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -141,7 +155,10 @@ class Login extends StatelessWidget {
                     ],
                   ),
                   MaterialButton(
-                    onPressed: () => Get.toNamed("/dashboard"),
+                    onPressed: () async {
+                      // Pass the phone number and password to remotelogin function
+                      remotelogin();
+                    },
                     color: Colors.transparent,
                     height: 50,
                     minWidth: double.maxFinite,
@@ -153,12 +170,12 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   InkWell(
                     onTap: () => Get.toNamed("/registration"),
-                    child: Text(
+                    child: const Text(
                       "Go to SignUp",
                       style: TextStyle(color: Colors.white),
                     ),
@@ -173,20 +190,38 @@ class Login extends StatelessWidget {
   }
 
   Future<void> remotelogin() async {
-    http.Response response;
-    response = await http.get(Uri.parse(
-        "https://todaysnewspaper.xyz/paul/Recipe/login.php?phonenumber=${phoneNumberController.text.trim()}&password=${passwordController.text.trim()}"));
-    if (response.statusCode == 200) {
-      var serverResponse = json.decode(response.body);
-      var loginStatus = serverResponse['success'];
-      if (loginStatus == 1) {
-        //navigate to dashboard
-        print("Login Success");
-      } else {
-        print("Username/Password is invalid");
+    String password = passwordController.text.trim();
+    String phonenumber = phoneNumberController.text.trim();
+    // Check if phoneNumber and password are not empty
+    print('phone $phonenumber and password $password');
+    if (phonenumber.isNotEmpty && password.isNotEmpty) {
+      try {
+        http.Response response = await http.get(Uri.parse(
+            "https://todaysnewspaper.xyz/paul/Recipe/login.php?phonenumber=$phonenumber&password=$password"));
+
+        if (response.statusCode == 200) {
+          var serverResponse = json.decode(response.body);
+          var loginStatus = serverResponse['success'];
+          if (loginStatus == 1) {
+            //navigate to dashboard
+            print("Login Success");
+            Get.offAndToNamed("/dashboard");
+          } else {
+            Get.snackbar(
+              "Error",
+              "Account not found. Please try signing up.",
+            );
+            print("Username/Password is invalid");
+          }
+        } else {
+          print("Server Error ${response.statusCode}");
+        }
+      } catch (e) {
+        print("Error: $e");
       }
     } else {
-      print("Server Error ${response.statusCode}");
+      // Handle empty phoneNumber or password
+      print("phoneNumber or password is empty");
     }
   }
 }

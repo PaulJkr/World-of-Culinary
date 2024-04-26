@@ -1,37 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:recipe_app/controller/logincontroller.dart';
 
 class CustomTextField extends StatelessWidget {
-  LoginController loginController = Get.put(LoginController());
   final String? hint;
+  final bool hideText;
   final IconData? icon;
   final IconData? prefIcon;
+  final LoginController? controller;
   final bool isPassword;
-  CustomTextField(
+
+  final TextEditingController userFieldController;
+  const CustomTextField(
       {super.key,
       this.hint,
+      this.hideText = false,
       this.icon,
       this.prefIcon,
       this.isPassword = false,
-      required TextEditingController controller,
+      required this.userFieldController,
+      required this.controller,
+      required TextEditingController customTextFieldController,
       required String hintMessage,
       required bool obscureText});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => TextField(
-          obscureText: loginController.isHidden.value,
-          decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: hint,
-              prefixIcon: Icon(icon),
-              suffixIcon: Obx(() => GestureDetector(
-                    child: Icon(loginController.isHidden.value
-                        ? Icons.visibility_off
-                        : Icons.visibility),
-                    onTap: () => loginController.toggleHide(),
-                  ))),
-        ));
+    return TextField(
+      cursorRadius: const Radius.elliptical(5, 0),
+      controller: userFieldController,
+      style: const TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        hintText: hint,
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        prefixIcon: Icon(icon),
+        suffixIcon: isPassword
+            ? IconButton(
+                onPressed: () {
+                  controller!.hidePassword.value =
+                      !controller!.hidePassword.value;
+                },
+                icon: const Icon(Icons.visibility),
+              )
+            : const SizedBox(
+                height: 10,
+                width: 10,
+              ),
+      ),
+      obscureText: hideText,
+    );
   }
 }

@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyRecipeApp extends StatelessWidget {
-  const MyRecipeApp({Key? key});
+  const MyRecipeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class DessertsScreen extends StatelessWidget {
     },
   ];
 
-  DessertsScreen({Key? key}) : super(key: key);
+  DessertsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class DessertsScreen extends StatelessWidget {
         title: const Text('Desserts'),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/bacc.jpg'),
             fit: BoxFit.cover,
@@ -94,12 +94,12 @@ class DessertsCard extends StatelessWidget {
   final List<String> instructions;
 
   const DessertsCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.image,
     required this.ingredients,
     required this.instructions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -151,12 +151,12 @@ class RecipePage extends StatelessWidget {
   final List<String> instructions;
 
   const RecipePage({
-    Key? key,
+    super.key,
     required this.title,
     required this.image,
     required this.ingredients,
     required this.instructions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +165,7 @@ class RecipePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/bacc.jpg'),
             fit: BoxFit.cover,

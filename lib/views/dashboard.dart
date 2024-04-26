@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class Dashboard extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/menu.jpg'),
+            image: AssetImage('assets/images/liko.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -101,18 +101,18 @@ class Dashboard extends StatelessWidget {
 }
 
 class RecipeList extends StatelessWidget {
-  const RecipeList({Key? key}) : super(key: key);
+  const RecipeList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Recipe List'),
+      child: Text(''),
     );
   }
 }
 
 class Categories extends StatelessWidget {
-  const Categories({Key? key}) : super(key: key);
+  const Categories({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +128,7 @@ class Categories extends StatelessWidget {
 }
 
 class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {

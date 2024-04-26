@@ -5,22 +5,23 @@ void main() {
 }
 
 class MyRecipeApp extends StatelessWidget {
-  const MyRecipeApp({Key? key}) : super(key: key);
+  const MyRecipeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Provide a fixed theme based on your preference
+    final ThemeData theme = ThemeData.light();
+
     return MaterialApp(
       title: 'Recipe App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: theme,
       home: const SettingsScreen(),
     );
   }
 }
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +53,6 @@ class SettingsScreen extends StatelessWidget {
               );
             },
           ),
-          ListTile(
-            title: const Text('Theme Preferences'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ThemePreferencesScreen(),
-                ),
-              );
-            },
-          ),
         ],
       ),
     );
@@ -70,7 +60,7 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class NotificationPreferencesScreen extends StatefulWidget {
-  const NotificationPreferencesScreen({Key? key}) : super(key: key);
+  const NotificationPreferencesScreen({super.key});
 
   @override
   _NotificationPreferencesScreenState createState() =>
@@ -115,7 +105,7 @@ class _NotificationPreferencesScreenState
 }
 
 class AccountSettingsScreen extends StatelessWidget {
-  const AccountSettingsScreen({Key? key}) : super(key: key);
+  const AccountSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -128,61 +118,15 @@ class AccountSettingsScreen extends StatelessWidget {
           ListTile(
             title: const Text('Change Password'),
             onTap: () {
+              Navigator.popAndPushNamed(context, '/registartion');
               // Navigate to Change Password screen
             },
           ),
           ListTile(
             title: const Text('Logout'),
             onTap: () {
+              Navigator.popAndPushNamed(context, '/login');
               // Perform logout action
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ThemePreferencesScreen extends StatefulWidget {
-  const ThemePreferencesScreen({Key? key}) : super(key: key);
-
-  @override
-  _ThemePreferencesScreenState createState() => _ThemePreferencesScreenState();
-}
-
-class _ThemePreferencesScreenState extends State<ThemePreferencesScreen> {
-  String selectedTheme = 'light';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Theme Preferences'),
-      ),
-      body: Column(
-        children: [
-          RadioListTile<String>(
-            title: const Text('Light Theme'),
-            value: 'light',
-            groupValue: selectedTheme,
-            onChanged: (String? value) {
-              if (value != null) {
-                setState(() {
-                  selectedTheme = value;
-                });
-              }
-            },
-          ),
-          RadioListTile<String>(
-            title: const Text('Dark Theme'),
-            value: 'dark',
-            groupValue: selectedTheme,
-            onChanged: (String? value) {
-              if (value != null) {
-                setState(() {
-                  selectedTheme = value;
-                });
-              }
             },
           ),
         ],
